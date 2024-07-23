@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta="UTF-8">
+		<title>test05</title>
+		<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+	
+		 <style>
+        /* 设置图表容器的大小 */
+        #main {
+            width: 100%;
+            height: 100vh;
+        }
+		</style>
+	
+	</head>
+
+
+	<body>
+	<div id="main"></div>
+	
+	
+	
+	
+	
+	
+	<script>
+	
+	var myChart = echarts.init(document.getElementById('main'));
+	var option = {
+   backgroundColor: '#0E1327',
+          grid: {
+            containLabel: true,
+            bottom: '10%',
+            top: '20%',
+            left: '5%',
+            right: '4%',
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow',
+            },
+          },
+          legend: {
+            top: '10%',
+            right:'4%',
+            data: ['制一部', '制二部', '制三部', '制四部'],
+            // itemWidth: 10,
+            // itemHeight: 10,
+            itemGap: 10,
+            textStyle: {
+              fontSize: 18,
+              color: '#C9D2FA',
+              // padding: [0, 0, 0, 10)],
+            },
+          },
+          xAxis: {
+            // name: "班级",
+            triggerEvent: true,
+            data: ['6日', '7日', '8日', '9日', '10日', '11日', '12日'],
+            axisLabel: {
+              interval: 0,
+              show: true,
+              fontSize: 18,
+              color: '#C9D2FA',
+            },
+            axisLine: {
+              show: false,
+              lineStyle: {
+                show: false,
+                color: '#F3F3F3',
+                width: 2,
+              },
+            },
+
+            axisTick: {
+              show: false,
+            },
+          },
+          yAxis: [
+            {
+              // name: '单位:万',
+              // type: 'value',
+              // nameTextStyle: {
+              //   color: '#444444',
+              // },
+              splitNumber: 2,
+              axisLabel: {
+                show: true,
+                fontSize: 18,
+                color: '#C9D2FA',
+                formatter: function (value) {
+                  // 在标签后面添加百分号
+                  return value + '%';
+                },
+              },
+              axisLine: {
+                show: false,
+              },
+              axisTick: {
+                show: false,
+              },
+              splitLine: {
+                lineStyle: {
+                  type: 'dashed',
+                  color: '#3E4A82',
+                },
+              },
+            },
+          ],
+          series: [
+            {
+              name: '制一部',
+              type: 'line',
+              symbol: 'circle',
+              symbolSize: 6,
+
+              // yAxisIndex: 1, // 与第二个 y 轴关联
+              itemStyle: {
+                color: '#8E35FF',
+              },
+              lineStyle: {
+                width: 4,
+              },
+              data: [100, 80, 120, 60, 90, 70, 70], // 折线图的数据
+            },
+            {
+              name: '制二部',
+              type: 'line',
+              symbol: 'circle',
+              symbolSize: 6,
+
+              // yAxisIndex: 1, // 与第二个 y 轴关联
+              itemStyle: {
+                color: '#FFB933',
+              },
+              lineStyle: {
+                width: 4,
+              },
+              data: [60, 70, 90, 40, 50, 80, 60], // 折线图的数据
+            },
+            {
+              name: '制三部',
+              type: 'line',
+              symbol: 'circle',
+              symbolSize: 6,
+              // yAxisIndex: 1, // 与第二个 y 轴关联
+              itemStyle: {
+                color: '#44C558',
+              },
+              lineStyle: {
+                width: 4,
+              },
+              data: [90, 70, 40, 70, 80, 65, 73], // 折线图的数据
+            },
+            {
+              name: '制四部',
+              type: 'line',
+              symbol: 'circle',
+              symbolSize: 6,
+              // yAxisIndex: 1, // 与第二个 y 轴关联
+              itemStyle: {
+                color: '#2F8FFF',
+              },
+              lineStyle: {
+                width: 4,
+              },
+              data: [85, 81, 12, 50, 40, 40, 70], // 折线图的数据
+            },
+          ],
+        }
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+
+	
+	
+	</script>
+	</body>
+
+
+
+
+</html>
