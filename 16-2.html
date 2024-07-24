@@ -48,7 +48,7 @@
 					type: 'graph',   //设置图表类型为 graph，用于展示图关系。
 					layout: 'none',   //取消自动布局，使用自定义位置。
 					symbol: 'rect',    //节点使用矩形符号。
-					symbolSize: [200, 60],     //设置节点的宽高。
+					symbolSize: [200, 40],     //设置节点矩形的宽高。
 					roam: true,     //允许图表拖拽和缩放。
 					
 					label: {          //设置节点标签的显示和格式。
@@ -71,7 +71,7 @@
 							//通过 itemStyle.normal.color 设置特定节点的颜色。
 							//在这个示例中，节点 'A1' 被设置为黄色，其它节点使用默认颜色。
 							switch(params.data.name) {
-								case 'A1':
+								case 'CF24001':
 									return '#FFFF00'; // 黄色
 								default:
 									return '#00A3E0'; // 默认颜色
@@ -81,7 +81,7 @@
 					
 					//使用 itemStyle.emphasis 来设置鼠标悬停时的边框颜色和宽度。
 					emphasis: {
-						borderColor: '#FF0000',
+						//borderColor: '#FF0000',
 						borderWidth: 2
 					}
 			},
@@ -93,32 +93,32 @@
 						fontSize: 10    //设置边标签的字体大小。
 					},
 					data: [
-						{ name: 'A1', x: 100, y: 50 },
-						{ name: 'A2', x: 100, y: 150 },
-						{ name: 'A3', x: 100, y: 250 },
-						{ name: 'A4', x: 100, y: 350 },
-						{ name: 'B1', x: 300, y: 100 },
-						{ name: 'B2', x: 300, y: 300 },
-						{ name: 'C1', x: 500, y: 50 },
-						{ name: 'C2', x: 500, y: 150 },
-						{ name: 'C3', x: 500, y: 250 },
-						{ name: 'C4', x: 500, y: 350 },
-						{ name: 'D1', x: 700, y: 100 },
-						{ name: 'D2', x: 700, y: 350 }
+						{ name: 'CF24001', x: 100, y: 50 },
+						{ name: 'CF24002', x: 100, y: 150 },
+						{ name: 'CF24003', x: 100, y: 250 },
+						{ name: 'CF24004', x: 100, y: 350 },
+						{ name: 'D24001', x: 300, y: 100 },
+						{ name: 'D24002', x: 300, y: 300 },
+						{ name: 'E24001', x: 500, y: 50 },
+						{ name: 'E24002', x: 500, y: 150 },
+						{ name: 'E24003', x: 500, y: 250 },
+						{ name: 'E24004', x: 500, y: 350 },
+						{ name: 'F24001', x: 700, y: 100 },
+						{ name: 'F24002', x: 700, y: 350 }
 					],
 					links: [
-						{ source: 'A1', target: 'B1', lineStyle: { curveness: 0 } },
-						{ source: 'A2', target: 'B1', lineStyle: { curveness: 0 } },
-						{ source: 'A3', target: 'B2', lineStyle: { curveness: 0 } },
-						{ source: 'A4', target: 'B2', lineStyle: { curveness: 0 } },
-						{ source: 'B1', target: 'C1', lineStyle: { curveness: 0 } },
-						{ source: 'B1', target: 'C2', lineStyle: { curveness: 0 } },
-						{ source: 'B2', target: 'C3', lineStyle: { curveness: 0 } },
-						{ source: 'B2', target: 'C4', lineStyle: { curveness: 0 } },
-						{ source: 'C1', target: 'D1', lineStyle: { curveness: 0 } },
-						{ source: 'C2', target: 'D1', lineStyle: { curveness: 0 } },
-						{ source: 'C3', target: 'D1', lineStyle: { curveness: 0 } },
-						{ source: 'C4', target: 'D2', lineStyle: { curveness: 0 } }
+						{ source: 'CF24001', target: 'D24001', lineStyle: { curveness: 0 } },
+						{ source: 'CF24002', target: 'D24001', lineStyle: { curveness: 0 } },
+						{ source: 'CF24003', target: 'D24002', lineStyle: { curveness: 0 } },
+						{ source: 'CF24004', target: 'D24002', lineStyle: { curveness: 0 } },
+						{ source: 'D24001', target: 'E24001', lineStyle: { curveness: 0 } },
+						{ source: 'D24001', target: 'E24002', lineStyle: { curveness: 0 } },
+						{ source: 'D24002', target: 'E24003', lineStyle: { curveness: 0 } },
+						{ source: 'D24002', target: 'E24004', lineStyle: { curveness: 0 } },
+						{ source: 'E24001', target: 'F24001', lineStyle: { curveness: 0 } },
+						{ source: 'E24002', target: 'F24001', lineStyle: { curveness: 0 } },
+						{ source: 'E24003', target: 'F24001', lineStyle: { curveness: 0 } },
+						{ source: 'E24004', target: 'F24002', lineStyle: { curveness: 0 } }
 					],
 					//lineStyle: {    // 设置边的样式，如透明度、宽度、弯曲度（curveness）。
 					 //       color: 'black',
