@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts Flow Chart</title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+	<style>
+	#main{
+		width: 100%; 
+		height:100vh;
+	
+	
+	}
+	</style>
+
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+		var dataMap = {
+			'A1': '111',
+			'A2': '222',
+			'A3': '333', // 你可以在这里添加更多的节点及其对应的值
+			'A4': '444'
+		};
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'Flow Chart'
+            },
+            tooltip: {
+				trigger: 'item',
+				formatter: function(params) {
+					// 使用 dataMap 来查找对应的值
+					var value = dataMap[params.name] || '无数据';
+					return '节点: ' + params.name + '<br/>值: ' + value;
+				}
+						},//启用提示框功能（这里为空，意味着使用默认提示）。
+				series: [{
+					type: 'graph',   //设置图表类型为 graph，用于展示图关系。
+					layout: 'none',   //取消自动布局，使用自定义位置。
+					symbol: 'rect',    //节点使用矩形符号。
+					symbolSize: [200, 60],     //设置节点的宽高。
+					roam: true,     //允许图表拖拽和缩放。
+					
+					label: {          //设置节点标签的显示和格式。
+						show: true,
+						formatter: '{b}',
+						fontSize: 20, // 字体大小
+						color: '#000', // 字体颜色
+						fontFamily: 'Arial', // 字体
+						fontWeight: 'bold', // 字体粗细
+						fontStyle: 'italic', // 字体样式
+						position: 'inside' // 标签位置
+					},
+					
+					  itemStyle:
+					  {
+							normal: 
+							{
+								color: function(params) {
+							// 根据节点的 name 设置颜色,
+							//通过 itemStyle.normal.color 设置特定节点的颜色。
+							//在这个示例中，节点 'A1' 被设置为黄色，其它节点使用默认颜色。
+							switch(params.data.name) {
+								case 'A1':
+									return '#FFFF00'; // 黄色
+								default:
+									return '#00A3E0'; // 默认颜色
+							}
+						}
+					},
+					
+					//使用 itemStyle.emphasis 来设置鼠标悬停时的边框颜色和宽度。
+					emphasis: {
+						borderColor: '#FF0000',
+						borderWidth: 2
+					}
+			},
+					
+					
+					edgeSymbol: ['none', 'arrow'],  //设置边的符号（无起点符号，有箭头终点符号）。
+					edgeSymbolSize: [4, 10],   // 设置边符号的大小。
+					edgeLabel: {
+						fontSize: 10    //设置边标签的字体大小。
+					},
+					data: [
+						{ name: 'A1', x: 100, y: 50 },
+						{ name: 'A2', x: 100, y: 150 },
+						{ name: 'A3', x: 100, y: 250 },
+						{ name: 'A4', x: 100, y: 350 },
+						{ name: 'B1', x: 300, y: 100 },
+						{ name: 'B2', x: 300, y: 300 },
+						{ name: 'C1', x: 500, y: 50 },
+						{ name: 'C2', x: 500, y: 150 },
+						{ name: 'C3', x: 500, y: 250 },
+						{ name: 'C4', x: 500, y: 350 },
+						{ name: 'D1', x: 700, y: 100 },
+						{ name: 'D2', x: 700, y: 350 }
+					],
+					links: [
+						{ source: 'A1', target: 'B1', lineStyle: { curveness: 0 } },
+						{ source: 'A2', target: 'B1', lineStyle: { curveness: 0 } },
+						{ source: 'A3', target: 'B2', lineStyle: { curveness: 0 } },
+						{ source: 'A4', target: 'B2', lineStyle: { curveness: 0 } },
+						{ source: 'B1', target: 'C1', lineStyle: { curveness: 0 } },
+						{ source: 'B1', target: 'C2', lineStyle: { curveness: 0 } },
+						{ source: 'B2', target: 'C3', lineStyle: { curveness: 0 } },
+						{ source: 'B2', target: 'C4', lineStyle: { curveness: 0 } },
+						{ source: 'C1', target: 'D1', lineStyle: { curveness: 0 } },
+						{ source: 'C2', target: 'D1', lineStyle: { curveness: 0 } },
+						{ source: 'C3', target: 'D1', lineStyle: { curveness: 0 } },
+						{ source: 'C4', target: 'D2', lineStyle: { curveness: 0 } }
+					],
+					//lineStyle: {    // 设置边的样式，如透明度、宽度、弯曲度（curveness）。
+					 //       color: 'black',
+					//		type: 'solid',//设置线条的类型。可以是 'solid'（实线）、'dashed'（虚线）或 'dotted'（点线）
+					//		shadowColor: 'rgba(0, 0, 0, 0.5)',   //设置线条的阴影颜色
+					//		shadowBlur: 10,  //线条阴影的模糊程度。值越大，阴影越模糊
+					//		shadowOffsetX: 5,   //设置阴影相对于线条的水平偏移量
+					//		shadowOffsetY: 5,    //设置阴影相对于线条的垂直偏移量
+					//		width: 2,
+					//		opacity: 0.8
+						
+				   // }
+					lineStyle: {
+						color: {
+							type: 'linear',
+							x: 0,
+							y: 0,
+							x2: 1,
+							y2: 1,
+							colorStops: [
+								{ offset: 0, color: 'rgba(255, 0, 0, 0.8)' }, // 红色渐变
+								{ offset: 1, color: 'rgba(0, 0, 255, 0.8)' }  // 蓝色渐变
+							]
+						},
+						width: 3,
+						type: 'dashed',
+						dashArray: [10, 5], // 定义虚线的长短
+						shadowColor: 'rgba(0, 0, 0, 0.5)', // 阴影颜色
+						shadowBlur: 8, // 阴影模糊程度
+						shadowOffsetX: 2, // 阴影水平偏移
+						shadowOffsetY: 2, // 阴影垂直偏移
+						opacity: 0.9, // 透明度
+						cap: 'round', // 线条末端形状为圆角
+						join: 'round', // 线条连接点形状为圆角
+						emphasis: {
+							color: 'yellow', // 鼠标悬停时的颜色
+							width: 5, // 鼠标悬停时的宽度
+							type: 'solid' // 鼠标悬停时的线条类型
+						}
+					}
+				}]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
