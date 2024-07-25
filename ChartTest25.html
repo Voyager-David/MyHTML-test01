@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts Flow Chart</title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+	<style>
+	#main{
+		width: 100%; 
+		height:100vh;
+	
+	
+	}
+	</style>
+
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+		let option = {
+			backgroundColor:'#071C32',
+			tooltip: {
+				show: true,
+				trigger: 'axis',
+				backgroundColor: 'rgba(255, 255, 255, .16)', // 设置背景颜色
+				textStyle: {
+					color: '#fff',
+					fontSize: 14
+				},
+				borderColor: 'rgba(255, 255, 255, .16)',
+				axisPointer: {
+					lineStyle: {
+						color: 'rgba(28, 124, 196, .6)'
+					},
+				},
+				// formatter: "{b}人员类别统计<br>{c}人"
+				formatter:function (params, ticket, callback) {
+					var htmlStr = '';
+					for(var i=0;i<params.length;i++){
+						var param = params[i];
+						var xName = param.name + '风险地区返秦情况';//x轴的名称
+						var seriesName = param.seriesName;//图例名称
+						var value = param.value;//y轴值
+						var color = param.color;//图例颜色
+						if(i===0){
+							htmlStr += xName + '<br/>';//x轴的名称
+						}
+						htmlStr +='<div>';
+						htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:'+color+';"></span>';//一个点
+						htmlStr += seriesName + '：' + value + '人';//圆点后面显示的文本
+						htmlStr += '</div>';
+					}
+					return htmlStr;
+				}
+			},
+			color:['#FF0000', '#F39800', '#16D6FF', '#25D677'],
+			legend: {
+				// icon: 'circle',
+				// itemWidth: 10,
+				itemGap: 4,
+				x: 'left',
+				top: '1%',
+				textStyle: {
+					color: '#fff',
+					fontSize: 13,
+					// padding:[0, 6, 0, 6],
+				}
+			},
+			grid: {
+				top: '18%',
+				left: '12%',
+				right: '2%',
+				bottom: '18%',
+			},
+			xAxis: [
+				{
+					type: 'category',
+					axisLine: {
+						lineStyle: {
+							color: '#2D4377'
+						}
+					},
+					axisLabel: {
+						interval: 0,
+						align: 'center',
+						rotate: '26',
+						margin: '20',
+						textStyle: {
+							fontSize: 14,
+							color: '#A9C3F0'
+						}
+					},
+					splitLine: {
+						show: false,
+					},
+					axisTick: {
+						show: false
+					},
+					boundaryGap: true,
+					data: ['08-30', '08-31', '09-01', '09-02', '09-03', '09-04', '09-05'], //this.$moment(data.times).format("HH-mm") ,
+				},
+			],
+
+			yAxis: [
+				{
+					type: 'value',
+					min: 0,
+					max: 500,
+					splitNumber: 6,
+					axisLine: {
+						lineStyle: {
+							color: '#2D4377'
+						}
+					},
+					splitLine: {
+						show: true,
+						lineStyle: {
+							color: '#2D4377',
+							type: 'dashed'
+						},
+					},
+					axisLabel: {
+						color: '#A9C3F0',
+						textStyle: {
+							fontSize: 14
+						}
+					},
+					axisTick: {
+						show: false
+					}
+				},
+			],
+			series: [
+				{
+					name: '高风险地区',
+					type: 'line',
+					showSymbol: true,
+					symbolSize: 8,
+					lineStyle: {
+						normal: {
+							color: '#FF2E2E',
+						},
+					},
+					itemStyle: {
+						color: '#FF2E2E',
+						borderColor: '#FF2E2E',
+						borderWidth: 2,
+					},
+					// emphasis: {
+					//     itemStyle: {
+					//         color: "#fff",
+					//         borderColor: "#FF2E2E",
+					//         borderWidth: 2,
+					//     },
+					// },
+					data: [60, 100, 90, 95, 65, 42, 50], //data.values
+				},
+				{
+					name: '中风险地区',
+					type: 'line',
+					showSymbol: true,
+					symbolSize: 8,
+					lineStyle: {
+						normal: {
+							color: '#F39800',
+						},
+					},
+					itemStyle: {
+						color: '#F39800',
+						borderColor: '#F39800',
+						borderWidth: 2,
+					},
+					// emphasis: {
+					//     itemStyle: {
+					//         color: "#fff",
+					//         borderColor: "#F39800",
+					//         borderWidth: 2,
+					//     },
+					// },
+					data: [90, 200, 300, 130, 100, 120, 180], //data.values
+				},
+				{
+					name: '低风险地区',
+					type: 'line',
+					showSymbol: true,
+					symbolSize: 8,
+					lineStyle: {
+						normal: {
+							color: '#16D6FF',
+						},
+					},
+					itemStyle: {
+						color: '#16D6FF',
+						borderColor: '#16D6FF',
+						borderWidth: 2,
+					},
+					// emphasis: {
+					//     itemStyle: {
+					//         color: "#fff",
+					//         borderColor: "#16D6FF",
+					//         borderWidth: 2,
+					//     },
+					// },
+					data: [220, 220, 400, 380, 310, 410, 450], //data.values
+				},
+				{
+					name: '常态化地区',
+					type: 'line',
+					showSymbol: true,
+					symbolSize: 8,
+					lineStyle: {
+						normal: {
+							color: '#25D677',
+						},
+					},
+					itemStyle: {
+						color: '#25D677',
+						borderColor: '#25D677',
+						borderWidth: 2,
+					},
+					// emphasis: {
+					//     itemStyle: {
+					//         color: "#fff",
+					//         borderColor: "#25D677",
+					//         borderWidth: 2,
+					//     },
+					// },
+					data: [300, 300, 190, 320, 280, 220, 310], //data.values
+				},
+			],
+		};
+		// formatter: function (params) {//超过五个字换行
+		//              var newParamsName = "";
+		//              var paramsNameNumber = params.length;
+		//              var provideNumber = 5;  //一行显示几个字
+		//              var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+		//              if (paramsNameNumber > provideNumber) {
+		//                 for (var p = 0; p < rowNumber; p++) {
+		//                    var tempStr = "";
+		//                    var start = p * provideNumber;
+		//                    var end = start + provideNumber;
+		//                    if (p == rowNumber - 1) {
+		//                       tempStr = params.substring(start, paramsNameNumber);
+		//                    } else {
+		//                       tempStr = params.substring(start, end) + "\n";
+		//                    }
+		//                    newParamsName += tempStr;
+		//                 }
+		 
+		//              } else {
+		//                 newParamsName = params;
+		//              }
+		//              return newParamsName
+		//           }
+
+
+		// formatter: function(params) {
+		// 				console.log('formatter', params, params.length)
+		// 				var newParamsName = '' // 最终拼接成的字符串
+		// 				var paramsNameNumber = params.length // 实际标签的个数
+		// 				var provideNumber = 5 // 每行能显示的字的个数
+		// 				// 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
+		// 				if (paramsNameNumber > provideNumber) {
+		// 					// ********重点在这里********
+		// 					newParamsName = params.substring(0, 5) + '..' // 最终拼成的字符串
+		// 				} else { // 将旧标签的值赋给新标签
+		// 					newParamsName = params
+		// 				}
+		// 				// 将最终的字符串返回
+		// 				return newParamsName
+		// 			}
+
+ // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
